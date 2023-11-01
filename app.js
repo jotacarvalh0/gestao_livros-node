@@ -22,6 +22,18 @@ app.get('/books', (req, res) => {
   res.json(books);
 });
 
+// Rota para obter um livro por ID
+app.get('/books/:id', (req, res) => {
+    const id = req.params.id;
+    const book = books.find((b) => b.id === id);
+    if (book) {
+      console.log(`Livro encontrado: ${book.title} por ${book.author}`);
+      res.json(book);
+    } else {
+      res.status(404).json({ message: 'Livro não encontrado' });
+    }
+  });
+
 // Rota para criar um novo livro
 app.post('/books', (req, res) => {
   const { title, author } = req.body;
